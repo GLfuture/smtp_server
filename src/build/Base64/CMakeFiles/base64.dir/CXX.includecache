@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../../include/base64.h
+string
+-
+string_view
+-
+
+/home/gong/projects/Smtp_Server/smtp_proxy_server/src/Base64/base64.cc
+base64.h
+/home/gong/projects/Smtp_Server/smtp_proxy_server/src/Base64/base64.h
+algorithm
+-
+stdexcept
+-
+

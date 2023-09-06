@@ -1,0 +1,13 @@
+{
+    "smtp_server_domain_name": "smtp.163.com",
+    "account": "gzj17607270093@163.com",
+    "password": "TVCAHUFPOPOEARRX",
+    "smtp_port": 25,
+    "topic": "大数据与人工智能团队",
+    "proxy_sender": "bigdata_c1004@163.com",
+    "type": "text/html",
+    "charset": "utf8mb4",
+    "bind_port": 8080,
+    "backlog": 10,
+    "event_num": 1024
+}
