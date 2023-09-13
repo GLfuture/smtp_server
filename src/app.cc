@@ -192,14 +192,15 @@ void recv_cb(Reactor& R,Tcp_Conn_Ptr smtp_conn)
     string_view request = conn->Get_Rbuffer();
     HTTP_NSP::HTTP http;
     http.Request_Decode(string(request));
-    http.Response_Set_Status(200);
+    http.Response_Set_Key_Value("Access-Control-Allow-Origin","*");
     if(http.Request_Get_Http_Type().compare("OPTIONS") == 0)
     {
-        http.Response_Set_Key_Value("Access-Control-Allow-Origin","*");
         http.Response_Set_Key_Value("Access-Control-Allow-Methods","POST");
+        http.Response_Set_Key_Value("Content-Length","0");
     }
     else if(http.Request_Get_Http_Type().compare("POST") == 0)
     {
+        http.Response_Set_Status(200);
         HTTP_NSP::Http_String json = http.Request_Get_Body();
         vector<string> ret = Proc_Msg(json);
         if(ret[0].compare("exit")==0){
@@ -217,6 +218,10 @@ void recv_cb(Reactor& R,Tcp_Conn_Ptr smtp_conn)
             http.Response_Set_Key_Value("Content-Type","text/plain");
             conn->Appand_Wbuffer(http.Response_Content_Head()+"ok\r\n");
         }
+    }else{
+        http.Response_Set_Status(400);
+        http.Response_Set_Key_Value("Content-Length","0");
+        conn->Appand_Wbuffer(http.Response_Content_Head());
     }
 
 
